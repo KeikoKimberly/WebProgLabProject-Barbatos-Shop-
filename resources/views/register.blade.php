@@ -1,5 +1,6 @@
 @extends('layout/main')
 @section('container')
+
     <script type="text/javascript">
         $(function() {
             $('#datepicker').datepicker();

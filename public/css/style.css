@@ -33,3 +33,27 @@ html,
     font-weight: bold;
     width: 100%;
 }
+
+.card-block {
+    min-height: 250px;
+}
+
+div.scrollmenu {
+    background-color: white;
+    overflow: auto;
+    white-space: nowrap;
+    height: 400px;
+    /* width: 300px; */
+  }
+
+  div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
