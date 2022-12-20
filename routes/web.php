@@ -19,9 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/homePage', [ProductController::class, 'viewAllProduct']);
+Route::get('/homePage', [ProductController::class, 'viewProduct']);
 
 Route::get('/register', [UserController::class, 'register']);
 Route::get('/login', [UserController::class, 'login']);
 Route::post('store-form', [UserController::class, 'userRegistration']);
 Route::post('checkLogIn', [UserController::class, 'userLogIn']);
+
+Route::prefix('/products')->group(function () {
+    Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct']);
+    // Route::get('/detail/{book}', [BooksController::class, 'showDetail']);
+});

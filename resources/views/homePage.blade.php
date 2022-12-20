@@ -1,6 +1,7 @@
 @extends('layout/main')
 @section('container')
     <br>
+
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -8,6 +9,13 @@
     @endif
 
     <div class="container" style="max-width: 80em; margin-top: 50px">
+        <div class="reg-title" style="text-align: left">
+            <span>
+                Beauty
+            </span>
+            &nbsp;
+            <a href="#">View All</a>
+        </div>
         <div class="scrollmenu">
             <div class="row flex-nowrap" style="margin: 20px">
                 @foreach ($products as $product)
@@ -16,6 +24,7 @@
                         <img src="{{ asset('uploads/'.$product->photo) }}" alt="">
                         <span>{{$product->name}}</span>
                         <span>{{$product->detail}}</span>
+                        <span><h5>IDR {{$product->price}}</h5></span>
                     </div>
                 </div>
                 @endforeach
