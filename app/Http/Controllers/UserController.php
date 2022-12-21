@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
@@ -12,12 +13,16 @@ class UserController extends Controller
 {
     public function register()
     {
-        return view('register');
+        return view('register', [
+            'categories' => Category::orderBy('name')->get()
+        ]);
     }
 
     public function login()
     {
-        return view('login');
+        return view('login', [
+            'categories' => Category::orderBy('name')->get()
+        ]);
     }
 
     public function userRegistration(UserRequest $request)

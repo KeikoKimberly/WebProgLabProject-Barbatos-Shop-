@@ -5,6 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        @yield('title')
+    </title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -38,11 +41,11 @@
     {{-- <title>{{ $title }}</title> --}}
 </head>
 
-<body class="d-flex flex-column">
+<body>
     <header>
         @include('partials/navbar')
     </header>
-    <div class="content" style="">
+    <div class="page-content container" style="">
         @yield('container')
     </div>
 </body>

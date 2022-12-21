@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Barbatos Shop</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -24,8 +24,8 @@
             </form>
         </div>
         <div class="d-flex me-auto">
-            <a href="" class="nav-link">Login</a>
-            <a href="" class="nav-link">Register</a>
+            <a href="{{route('login')}}" class="nav-link">Login</a>
+            <a href="{{route('register')}}" class="nav-link">Register</a>
         </div>
     </div>
 </nav>

@@ -20,7 +20,7 @@ class ProductsSeeder extends Seeder
             'name' => 'scarlet',
             'detail' => 'ini sabun scarlett',
             'price' => 45000,
-            'photo' => 'products/Scarlett.jpg'
+            'photo' => 'Scarlett.jpg'
         ]);
 
         DB::table('products')->insert([
@@ -28,7 +28,7 @@ class ProductsSeeder extends Seeder
             'name' => 'skintific',
             'detail' => 'ini sabun skintific',
             'price' => 65000,
-            'photo' => 'products/Skintific2.jpg'
+            'photo' => 'Skintific2.jpg'
         ]);
     }
 }

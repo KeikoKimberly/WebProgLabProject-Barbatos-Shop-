@@ -21,7 +21,7 @@
                 @foreach ($products as $product)
                 <div class="col-3">
                     <div class="card card-block">
-                        <img src="{{ asset('uploads/'.$product->photo) }}" alt="">
+                        <img src="{{ asset('storage/img/product_images/'.$product->photo) }}" alt="">
                         <span>{{$product->name}}</span>
                         <span>{{$product->detail}}</span>
                         <span><h5>IDR {{$product->price}}</h5></span>

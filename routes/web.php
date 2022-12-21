@@ -21,12 +21,14 @@ Route::get('/', function () {
 
 Route::get('/homePage', [ProductController::class, 'viewProduct']);
 
-Route::get('/register', [UserController::class, 'register']);
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/register', [UserController::class, 'register'])->name('register');
+Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('store-form', [UserController::class, 'userRegistration']);
 Route::post('checkLogIn', [UserController::class, 'userLogIn']);
 
-Route::prefix('/products')->group(function () {
-    Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct']);
-    // Route::get('/detail/{book}', [BooksController::class, 'showDetail']);
+Route::prefix('/products')->name('products.')->group(function () {
+    Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct'])->name('viewProduct');
+    Route::get('/create',[ProductController::class, 'create'])->name('create');
+    Route::post('/store',[ProductController::class, 'store'])->name('store');
+
 });
