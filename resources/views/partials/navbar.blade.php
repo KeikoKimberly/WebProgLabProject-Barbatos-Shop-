@@ -17,6 +17,9 @@
                         @endforeach
                     </div>
                 </li>
+                <li>
+                    <a href="{{route('products.manage')}}" class="nav-link">Manage Product</a>
+                </li>
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

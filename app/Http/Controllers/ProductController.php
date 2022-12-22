@@ -63,6 +63,13 @@ class ProductController extends Controller
         return view('products.viewByCategory');
     }
 
+    public function manage()
+    {
+        return view('products.manage', [
+            'categories' => Category::orderBy('name')->get()
+        ]);
+    }
+
     public function inputValidation($request)
     {
         $request->validate([

@@ -30,5 +30,5 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct'])->name('viewProduct');
     Route::get('/create',[ProductController::class, 'create'])->name('create');
     Route::post('/store',[ProductController::class, 'store'])->name('store');
-
+    Route::get('/manage-product',[ProductController::class, 'manage'])->name('manage');
 });
