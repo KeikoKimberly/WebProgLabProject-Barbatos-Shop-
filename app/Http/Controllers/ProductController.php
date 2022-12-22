@@ -48,7 +48,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $this->inputValidation($request);
+        $this->inputValidation($request, TRUE);
         $image = $this->imgValidation($request, 'public/img/product_images');
 
         DB::table('products')->insert([
@@ -66,26 +66,75 @@ class ProductController extends Controller
     public function manage()
     {
         return view('products.manage', [
-            'categories' => Category::orderBy('name')->get()
+            'categories' => Category::orderBy('name')->get(),
+            'products' => Product::paginate(10)
         ]);
     }
 
-    public function inputValidation($request)
+    public function manageByName(Request $request)
     {
+        $products = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate(10);
+        return view('products.manage', [
+            'categories' => Category::orderBy('name')->get(),
+            'products' => $products
+        ]);
+    }
+
+    public function edit(Product $product)
+    {
+        return view('products.edit',[
+            'categories' => Category::orderBy('name')->get(),
+            'product' => $product
+        ]);
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $this->inputValidation($request, FALSE);
+        if ($request->hasFile('image')) {
+            $image = $this->imgValidation($request, 'public/img/product_images');
+        } else {
+            $image = $request->old_image;
+        }
+
+        $product->update([
+            'name' => ucWords($request->name),
+            'category_id' => $request->category_id,
+            'detail' => $request->detail,
+            'price' => $request->price,
+            'photo' => $image,
+        ]);
+
+        return redirect()->route('homePage');
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('homePage');
+    }
+
+    public function inputValidation($request, Bool $imageRequired)
+    {
+        if($imageRequired){
+            $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg',
+            ],[
+                'image.image' => "Please upload a product photo",
+                'image.mimes' => "The photo can only be in jpg/png/jpeg format",
+            ]);
+        }
         $request->validate([
             'name' => 'required|string',
             'category_id' => 'required|string',
             'detail' => 'required|string',
             'price' => 'required|integer',
-            'image' => 'required|image|mimes:jpg,png,jpeg',
         ],[
             'name.required' => "Please fill the product name",
             'category_id.required' => "Please fill the product category",
             'detail.required' => "Please fill the product detail",
             'price.required' => "Please fill the product price",
             'price.integer' => "Please fill the price section with number only",
-            'image.image' => "Please upload a product photo",
-            'image.mimes' => "The photo can only be in jpg/png/jpeg format",
         ]);
     }
 
