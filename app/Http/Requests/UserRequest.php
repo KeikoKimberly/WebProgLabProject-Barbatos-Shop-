@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'password' => 'required|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'confirmedPassword' => 'required|same:password',
             'country_id' => 'required',
-            'dob' => 'required',
+            'dob' => 'required|before:today|after:01/01/1900',
             'gender' => 'required'
         ];
     }
