@@ -118,7 +118,8 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3 mb-3">Register</button>
-
+                        <br>
+                        <span>Already have an account ? login <a href="{{route('login')}}">here</a></span>
                     </form>
                 </div>
             </div>

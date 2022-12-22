@@ -8,50 +8,30 @@
         </div>
     @endif
 
-    <div class="container" style="max-width: 80em; margin-top: 50px">
+
+    @foreach ($categories as $category)
+    <div class="container" style="max-width: 80em; margin-bottom: 50px;">
         <div class="reg-title" style="text-align: left">
             <span>
-                Beauty
+                {{$category->name}}
             </span>
             &nbsp;
-            <a href="#">View All</a>
+            <a href="{{url('products/productCategory/'.$loop->iteration)}}">View All</a>
         </div>
         <div class="scrollmenu">
             <div class="row flex-nowrap" style="margin: 20px">
-                @foreach ($products as $product)
+                @foreach ($products[$loop->iteration] as $product)
                 <div class="col-3">
                     <div class="card card-block">
-                        <img src="{{ asset('storage/img/product_images/'.$product->photo) }}" alt="">
+                        <img src="{{ asset('uploads/products/'.$product->photo) }}" alt="">
                         <span>{{$product->name}}</span>
                         <span>{{$product->detail}}</span>
                         <span><h5>IDR {{$product->price}}</h5></span>
                     </div>
                 </div>
                 @endforeach
-                {{-- <div class="col-3">
-                    <div class="card card-block">
-                        <img src="{{ asset('uploads/products/Scarlett.jpg') }}" alt="">
-                        <span>Card</span>
-                        <span>Tes</span>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card card-block">
-                        <img src="{{ asset('uploads/products/Skintific2.jpg') }}" alt="">
-                        <span>Card</span>
-                        <span>Tes</span>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card card-block">Card tes</div>
-                </div>
-                <div class="col-3">
-                    <div class="card card-block">Card tes</div>
-                </div>
-                <div class="col-3">
-                    <div class="card card-block">Card tes</div>
-                </div> --}}
             </div>
         </div>
     </div>
+    @endforeach
 @endsection

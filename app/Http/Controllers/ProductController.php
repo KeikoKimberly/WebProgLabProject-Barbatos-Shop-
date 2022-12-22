@@ -15,17 +15,19 @@ class ProductController extends Controller
     {
 
         if ($category_id == 0) {
-            $product = Product::all();
-            $categories = Category::all();
+            $productsByCat = Product::get()->groupBy('category_id');
+            $categories = Category::orderBy('id')->get();
+            $categories_total = Category::all()->count();
 
-            return view('homePage', ['products' => $product, 'categories' => $categories]);
+            return view('homePage', ['products' => $productsByCat, 'categories' => $categories, 'category_total' => $categories_total]);
         } else {
             $categories = Category::all();
 
-            $data = Category::join('products', 'products.category_id', '=', 'categories.id')->where('products.category_id','=',$category_id)
-              		->get(['products.name as proName', 'products.detail', 'products.price', 'products.photo', 'categories.name as catName']);
-            $title = $data[0]->catName;
-            return view('viewByCategory', ['data' => $data, 'categories' => $categories, 'title' => $title]);
+            $data = Product::where('products.category_id','=',$category_id)->paginate(10);
+
+            $category_name = Category::where('id','=',$category_id)->first();
+
+            return view('products.viewByCategory', ['data' => $data, 'categories' => $categories, 'title' => $category_name]);
         }
     }
 
@@ -36,7 +38,7 @@ class ProductController extends Controller
         $products = $category->products;
         $title = "Category: " . $category->name;
 
-        return view('viewByCategory', ['product' => $products, 'title' => $title, 'categories' => $categories]);
+        return view('products.viewByCategory', ['product' => $products, 'title' => $title, 'categories' => $categories]);
     }
 
     public function create()
