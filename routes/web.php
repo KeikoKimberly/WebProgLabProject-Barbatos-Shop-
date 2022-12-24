@@ -22,8 +22,10 @@ Route::get('/', function () {
 Route::get('/homePage', [ProductController::class, 'viewProduct'])->name('homePage');
 
 Route::get('/register', [UserController::class, 'register'])->name('register');
+Route::get('/registerAdmin', [UserController::class, 'registerAdmin'])->name('registerAdmin');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('store-form', [UserController::class, 'userRegistration']);
+Route::post('store-form-admin', [UserController::class, 'adminRegistration']);
 Route::post('checkLogIn', [UserController::class, 'userLogIn']);
 
 Route::prefix('/products')->name('products.')->group(function () {
