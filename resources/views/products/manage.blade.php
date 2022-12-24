@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-lg-2 col-12">
                             <div class="d-flex">
-                                <a href="{{route('products.edit', $product->id)}}" class="btn btn-warning me-2">Edit</a>
+                                <a href="{{route('products.edit', $product->id)}}" class="btn btn-warning me-2 text-white">Edit</a>
                                 <form action="{{route('products.destroy', $product->id)}}" method="POST">
                                     @csrf
                                     <input type="hidden" name='_method' value="DELETE">

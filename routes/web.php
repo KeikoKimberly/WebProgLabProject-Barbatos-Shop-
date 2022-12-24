@@ -27,6 +27,7 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('store-form', [UserController::class, 'userRegistration']);
 Route::post('store-form-admin', [UserController::class, 'adminRegistration']);
 Route::post('checkLogIn', [UserController::class, 'userLogIn']);
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::prefix('/products')->name('products.')->group(function () {
     Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct'])->name('viewProduct');

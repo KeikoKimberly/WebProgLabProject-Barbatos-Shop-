@@ -18,7 +18,7 @@ class ProductController extends Controller
             $productsByCat = Product::get()->groupBy('category_id');
             $categories = Category::orderBy('id')->get();
             $categories_total = Category::all()->count();
-
+            // return $productsByCat;
             return view('homePage', ['products' => $productsByCat, 'categories' => $categories, 'category_total' => $categories_total]);
         } else {
             $categories = Category::all();

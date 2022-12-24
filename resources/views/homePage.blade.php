@@ -8,7 +8,6 @@
         </div>
     @endif
 
-
     @foreach ($categories as $category)
     <div class="container" style="max-width: 80em; margin-bottom: 50px;">
         <div class="reg-title" style="text-align: left">
@@ -20,16 +19,20 @@
         </div>
         <div class="scrollmenu">
             <div class="row flex-nowrap" style="margin: 20px">
-                @foreach ($products[$loop->iteration] as $product)
-                <div class="col-3">
-                    <div class="card card-block">
-                        <img src="{{ asset('uploads/products/'.$product->photo) }}" alt="">
-                        <span>{{$product->name}}</span>
-                        <span>{{$product->detail}}</span>
-                        <span><h5>IDR {{$product->price}}</h5></span>
-                    </div>
-                </div>
-                @endforeach
+                @if ($value = $products[$loop->iteration] ?? null)
+                    @foreach ($products[$loop->iteration] as $product)
+                        <div class="col-3">
+                            <div class="card card-block">
+                                <img src="{{ asset('uploads/products/'.$product->photo) }}" alt="">
+                                <span>{{$product->name}}</span>
+                                <span>{{$product->detail}}</span>
+                                <span><h5>IDR {{$product->price}}</h5></span>
+                            </div>
+                        </div>
+                    @endforeach
+                 @else
+                    <h4>Empty</h4>
+                @endif
             </div>
         </div>
     </div>

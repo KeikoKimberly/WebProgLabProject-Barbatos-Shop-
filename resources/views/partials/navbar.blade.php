@@ -17,9 +17,12 @@
                         @endforeach
                     </div>
                 </li>
-                <li>
-                    <a href="{{route('products.manage')}}" class="nav-link">Manage Product</a>
-                </li>
+                @if (Auth::check() && auth()->user()->role == 0)
+                    <li>
+                        <a href="{{route('products.manage')}}" class="nav-link">Manage Product</a>
+                    </li>
+                @endif
+
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -27,8 +30,12 @@
             </form>
         </div>
         <div class="d-flex me-auto">
-            <a href="{{route('login')}}" class="nav-link">Login</a>
-            <a href="{{route('register')}}" class="nav-link">Register</a>
+            @if (Auth::check())
+                <a href="{{route('logout')}}" class="nav-link">Logout</a>
+            @else
+                <a href="{{route('login')}}" class="nav-link">Login</a>
+                <a href="{{route('register')}}" class="nav-link">Register</a>
+            @endif
         </div>
     </div>
 </nav>
