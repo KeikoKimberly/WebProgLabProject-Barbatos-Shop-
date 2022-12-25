@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -23,9 +24,9 @@ class ProductController extends Controller
         } else {
             $categories = Category::all();
 
-            $data = Product::where('products.category_id','=',$category_id)->paginate(10);
+            $data = Product::where('products.category_id', '=', $category_id)->paginate(10);
 
-            $category_name = Category::where('id','=',$category_id)->first();
+            $category_name = Category::where('id', '=', $category_id)->first();
 
             return view('products.viewByCategory', ['data' => $data, 'categories' => $categories, 'title' => $category_name]);
         }
@@ -41,9 +42,24 @@ class ProductController extends Controller
         return view('products.viewByCategory', ['product' => $products, 'title' => $title, 'categories' => $categories]);
     }
 
+    public function viewProductDetail($id)
+    {
+        if (Auth::check() && auth()->user()->role == 1) {
+            $product = DB::table('products')->where('products.id', '=', $id)->first();
+            $categories = Category::all();
+
+            return view('products.productDetail', ['product' => $product, 'categories' => $categories]);
+        } else {
+            $product = DB::table('products')->where('products.id', '=', $id)->first();
+            $categories = Category::all();
+
+            return view('products.productDetailAdmin', ['product' => $product, 'categories' => $categories]);
+        }
+    }
+
     public function create()
     {
-        return view('products.create',[
+        return view('products.create', [
             'categories' => Category::all()
         ]);
     }
@@ -75,7 +91,7 @@ class ProductController extends Controller
 
     public function manageByName(Request $request)
     {
-        $products = Product::where('name', 'LIKE', '%'.$request->name.'%')->paginate(10);
+        $products = Product::where('name', 'LIKE', '%' . $request->name . '%')->paginate(10);
         return view('products.manage', [
             'categories' => Category::orderBy('name')->get(),
             'products' => $products
@@ -84,7 +100,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        return view('products.edit',[
+        return view('products.edit', [
             'categories' => Category::orderBy('name')->get(),
             'product' => $product
         ]);
@@ -118,10 +134,10 @@ class ProductController extends Controller
 
     public function inputValidation($request, Bool $imageRequired)
     {
-        if($imageRequired){
+        if ($imageRequired) {
             $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg',
-            ],[
+            ], [
                 'image.image' => "Please upload a product photo",
                 'image.mimes' => "The photo can only be in jpg/png/jpeg format",
             ]);
@@ -131,7 +147,7 @@ class ProductController extends Controller
             'category_id' => 'required|string',
             'detail' => 'required|string',
             'price' => 'required|integer',
-        ],[
+        ], [
             'name.required' => "Please fill the product name",
             'category_id.required' => "Please fill the product category",
             'detail.required' => "Please fill the product detail",
@@ -145,7 +161,7 @@ class ProductController extends Controller
         $replacedName = ucWords(str_replace(array(' '), '_', $request->name));
 
         $extension = $request->file('image')->getClientOriginalExtension();
-        $fileName = $replacedName.'.'.$extension;
+        $fileName = $replacedName . '.' . $extension;
         Storage::putFileAs($path, $request->image, $fileName);
 
         return $fileName;

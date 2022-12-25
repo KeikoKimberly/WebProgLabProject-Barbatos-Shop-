@@ -24,7 +24,8 @@ class UserController extends Controller
     public function registerAdmin()
     {
         return view('registerAdmin', [
-            'categories' => Category::orderBy('name')->get()
+            'categories' => Category::orderBy('name')->get(),
+            'countries' => Country::orderBy('name')->get(),
         ]);
     }
 

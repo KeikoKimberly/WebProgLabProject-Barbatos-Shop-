@@ -28,15 +28,26 @@ Route::post('store-form', [UserController::class, 'userRegistration']);
 Route::post('store-form-admin', [UserController::class, 'adminRegistration']);
 Route::post('checkLogIn', [UserController::class, 'userLogIn']);
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+
+Route::middleware(['auth'])->group(
+    function () {
+        Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    }
+);
 
 Route::prefix('/products')->name('products.')->group(function () {
     Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct'])->name('viewProduct');
-    Route::get('/create',[ProductController::class, 'create'])->name('create');
-    Route::post('/store',[ProductController::class, 'store'])->name('store');
-    Route::get('/manage-product',[ProductController::class, 'manage'])->name('manage');
-    Route::get('/manage-product/search',[ProductController::class, 'manageByName'])->name('manageByName');
-    Route::get('/edit/{product}',[ProductController::class, 'edit'])->name('edit');
-    Route::put('/update/{product}',[ProductController::class, 'update'])->name('update');
-    Route::delete('/destroy/{product}',[ProductController::class, 'destroy'])->name('destroy');
+    Route::get('/productDetail/{id?}', [ProductController::class, 'viewProductDetail'])->name('viewProductDetail');
+
+    Route::middleware(['auth', 'admin'])->group(
+        function () {
+            Route::get('/create', [ProductController::class, 'create'])->name('create');
+            Route::post('/store', [ProductController::class, 'store'])->name('store');
+            Route::get('/manage-product', [ProductController::class, 'manage'])->name('manage');
+            Route::get('/manage-product/search', [ProductController::class, 'manageByName'])->name('manageByName');
+            Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('edit');
+            Route::put('/update/{product}', [ProductController::class, 'update'])->name('update');
+            Route::delete('/destroy/{product}', [ProductController::class, 'destroy'])->name('destroy');
+        }
+    );
 });

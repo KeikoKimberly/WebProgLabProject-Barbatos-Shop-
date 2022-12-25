@@ -16,8 +16,6 @@ body{
     background: #ccc;
 }
 
-
-
 .page-content{
     padding-top: 125px;
     padding-bottom: 75px;
@@ -45,16 +43,17 @@ body{
     width: 100%;
 }
 
-.card-block {
-    min-height: 250px;
-}
+/* .card-block {
+    height: 250px;
+    width: 250px;
+} */
 
-div.scrollmenu {
+  div.scrollmenu {
     background-color: white;
     overflow: auto;
     white-space: nowrap;
-    height: 400px;
-    /* width: 300px; */
+    /* height: 400px; */
+    min-width: 500px;
   }
 
   div.scrollmenu a {
@@ -65,6 +64,22 @@ div.scrollmenu {
     text-decoration: none;
   }
 
-  div.scrollmenu a:hover {
-    background-color: #777;
+  div.scrollMenuCat {
+    background-color: white;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  ul {
+    list-style: none;
+    display: table;
+  }
+
+  li {
+    display: table-row;
+  }
+
+  b {
+    display: table-cell;
+    padding-right: 1em;
   }
