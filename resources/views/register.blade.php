@@ -106,10 +106,10 @@
                                 <select class="form-select @error('country_id') is-invalid @enderror"
                                     aria-label="Default select example" name="country_id">
                                     {{-- <option selected>Open this select menu</option> --}}
-                                    <option value="1">Indonesia</option>
-                                    <option value="2">Malaysia</option>
-                                    <option value="3">Singapore</option>
-                                    <option value="4">Thailand</option>
+                                    <option disabled selected value="">Select a Country</option>
+                                    @foreach ($countries as $country)
+                                        <option {{ old('country_id') == $country->id ? "selected" : "" }} value= {{$country->id}}>{{$country->name}}</option>
+                                    @endforeach
                                 </select>
                                 @error('country_id')
                                     {{-- <span class="text-danger">{{ $errors->first('country_id') }}</span> --}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,8 @@ class UserController extends Controller
     public function register()
     {
         return view('register', [
-            'categories' => Category::orderBy('name')->get()
+            'categories' => Category::orderBy('name')->get(),
+            'countries' => Country::orderBy('name')->get(),
         ]);
     }
 
@@ -83,5 +85,12 @@ class UserController extends Controller
         Session::flush();
         Auth::logout();
         return redirect('homePage');
+    }
+
+    public function profile()
+    {
+        return view('users.profile',[
+            'categories' => Category::orderBy('name')->get()
+        ]);
     }
 }

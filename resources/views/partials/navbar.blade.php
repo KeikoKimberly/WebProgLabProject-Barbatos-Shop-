@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="{{route('homePage')}}">Barbatos Shop</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,17 +24,29 @@
                 @endif
 
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
         </div>
+        {{-- <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> --}}
         <div class="d-flex me-auto">
             @if (Auth::check())
-                <a href="{{route('logout')}}" class="nav-link">Logout</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">{{auth()->user()->name}}</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{route('profile')}}">Profile</a>
+                            <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             @else
-                <a href="{{route('login')}}" class="nav-link">Login</a>
-                <a href="{{route('register')}}" class="nav-link">Register</a>
+                <a href="{{route('login')}}" class="nav-link text-black">Login</a>
+                <a href="{{route('register')}}" class="nav-link text-black">Register</a>
             @endif
         </div>
     </div>
