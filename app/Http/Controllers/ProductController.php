@@ -132,6 +132,23 @@ class ProductController extends Controller
         return redirect()->route('homePage');
     }
 
+    public function purchase(Request $request, $id)
+    {
+        DB::table('histories')->insert([
+            'user_id' => auth()->user()->id,
+            'product_id' => $id,
+            'qty' => $request->qty,
+            'created_at' =>  Carbon::now(),
+        ]);
+
+        return redirect()->back()->with('status', 'Product Purchased');
+    }
+
+    public function addToCart(Request $request)
+    {
+        return "msk cart";
+    }
+
     public function inputValidation($request, Bool $imageRequired)
     {
         if ($imageRequired) {

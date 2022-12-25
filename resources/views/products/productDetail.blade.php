@@ -3,16 +3,31 @@
 
     <div class="container" style="max-width: 80em; margin-top: 50px">
         <div class="card">
-            <div class="row flex-nowrap" style="margin: 20px">
-                <div class="col-3">
-                    <img src="{{ asset('uploads/products/'.$product->photo) }}"  style="width: 300px; height: 300px;" alt="">
+            <div class="row" style="margin: 20px">
+                <div class="col-lg-3 col-12">
+                    <img src="{{ asset('uploads/products/'.$product->photo) }}" class="img-fluid" alt="">
                 </div>
-                <div class="col-3 ml-5">
-                    <h3>{{ $product->name }}</h3>
-                    <li><b>Detail </b> {{ $product->detail }}</li>
-                    <li><b>Price </b> {{ $product->price }}</li>
-                    <li><b>Qty </b> <input type="number" min="0" name="qty"></li>
-                    <li><button type="button" style="margin-top: 140px;" class="btn btn-success">Purchase</button></li>
+                <div class="col-lg-9 col-12 px-md-5 px-2 py-md-0 py-2">
+                    <form id="form-regist" enctype="multipart/form-data" action="{{route('products.purchase', $product->id)}}" method="POST">
+                        @csrf
+                        <h3>{{ $product->name }}</h3>
+                        <li><b>Detail </b> {{ $product->detail }}</li>
+                        <li><b>Price </b> {{ $product->price }}</li>
+                        <li>
+                            <b>Qty </b> <input type="number" min="0" name="qty" required>
+                            @error('qty')
+                                <span style="color:red">{{$message}}</span>
+                            @enderror
+                        </li>
+                        <div class="d-flex justify-content-start align-items-center">
+                            <div class="me-2">
+                                <button type="submit" class="btn btn-primary rounded-20 mt-4">Purchase</button>
+                            </div>
+                            <div class="ms-2">
+                                <button type="submit" class="btn btn-primary rounded-20 mt-4" formaction="{{route('products.addToCart')}}">Add to Cart</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

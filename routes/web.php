@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(
 Route::prefix('/products')->name('products.')->group(function () {
     Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct'])->name('viewProduct');
     Route::get('/productDetail/{id?}', [ProductController::class, 'viewProductDetail'])->name('viewProductDetail');
+    Route::post('/purchase/{id}', [ProductController::class, 'purchase'])->name('purchase');
+    Route::post('/add-to-cart', [ProductController::class, 'addToCart'])->name('addToCart');
 
     Route::middleware(['auth', 'admin'])->group(
         function () {
