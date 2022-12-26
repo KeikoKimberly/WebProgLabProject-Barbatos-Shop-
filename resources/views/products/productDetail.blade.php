@@ -8,7 +8,7 @@
                     <img src="{{ asset('uploads/products/'.$product->photo) }}" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-9 col-12 px-md-5 px-2 py-md-0 py-2">
-                    <form id="form-regist" enctype="multipart/form-data" action="{{route('products.purchase', $product->id)}}" method="POST">
+                    <form id="form-regist" enctype="multipart/form-data" action="{{route('cartItem.addToCart', $product->id)}}" method="POST">
                         @csrf
                         <h3>{{ $product->name }}</h3>
                         <li><b>Detail </b> {{ $product->detail }}</li>
@@ -22,9 +22,6 @@
                         <div class="d-flex justify-content-start align-items-center">
                             <div class="me-2">
                                 <button type="submit" class="btn btn-primary rounded-20 mt-4">Purchase</button>
-                            </div>
-                            <div class="ms-2">
-                                <button type="submit" class="btn btn-primary rounded-20 mt-4" formaction="{{route('products.addToCart')}}">Add to Cart</button>
                             </div>
                         </div>
                     </form>

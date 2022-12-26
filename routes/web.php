@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CartItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +41,6 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct'])->name('viewProduct');
     Route::get('/productDetail/{id?}', [ProductController::class, 'viewProductDetail'])->name('viewProductDetail');
     Route::post('/purchase/{id}', [ProductController::class, 'purchase'])->name('purchase');
-    Route::post('/add-to-cart', [ProductController::class, 'addToCart'])->name('addToCart');
 
     Route::middleware(['auth', 'admin'])->group(
         function () {
@@ -52,4 +53,15 @@ Route::prefix('/products')->name('products.')->group(function () {
             Route::delete('/destroy/{product}', [ProductController::class, 'destroy'])->name('destroy');
         }
     );
+});
+
+Route::prefix('/transactions')->name('transactions.')->group(function () {
+    Route::get('purchase', [TransactionController::class, 'purchase'])->name('purchase');
+    Route::get('history', [TransactionController::class, 'showHistory'])->name('history');
+});
+
+Route::prefix('/cart')->name('cartItem.')->group(function () {
+    Route::get('/', [CartItemController::class, 'index'])->name('index');
+    Route::post('/add-to-cart/{id}', [CartItemController::class, 'addToCart'])->name('addToCart');
+    Route::delete('/destroy/{cartItem}', [CartItemController::class, 'destroy'])->name('destroy');
 });
