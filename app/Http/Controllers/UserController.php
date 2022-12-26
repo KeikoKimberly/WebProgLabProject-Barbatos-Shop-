@@ -10,6 +10,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
@@ -63,11 +64,18 @@ class UserController extends Controller
         $reg->gender = $request->gender === "male" ? 1 : 0;
         $reg->role = 0;
         $reg->save();
-        return redirect('register')->with('status', 'Register succeed');
+        return redirect('registerAdmin')->with('status', 'Register succeed');
     }
 
     public function userLogIn(Request $request)
     {
+        $name = $request->name;
+        $password = $request->password;
+
+        if($request->remember_me) {
+            Cookie::queue('name_cookie', $name, 120);
+            Cookie::queue('password_cookie', $password, 120);
+        }
 
         $credentials = $request->validate([
             'email'  => ['required', 'email'],

@@ -7,21 +7,26 @@
         </div>
         <div class="scrollMenuCat">
             <div class="row row-cols-5 m-1">
-                @foreach ($data as $product)
-                    <div class="col card card-block p-2"
-                        onclick="location.href='{{ url('products/productDetail/' . $product->id) }}';"
-                        style="cursor: pointer;">
-                        <img src="{{ asset('uploads/products/' . $product->photo) }}" alt="">
-                        {{-- <a href="{{url('products/productDetail/'.$product->id)}}" class="stretched-link dark">{{$product->name}}</a> --}}
-                        <span>
-                            <h6 class="mt-2">{{ $product->name }}</h6>
-                        </span>
-                        <span>{{ $product->detail }}</span>
-                        <span>
-                            <h5>IDR {{ $product->price }}</h5>
-                        </span>
-                    </div>
-                @endforeach
+                @if ($value = $data[0] ?? null)
+                    @foreach ($data as $product)
+                        <div class="col card card-block p-2"
+                            onclick="location.href='{{ url('products/productDetail/' . $product->id) }}';"
+                            style="cursor: pointer;">
+                            <img src="{{ asset('uploads/products/' . $product->photo) }}" alt=""
+                                style="width: 235px; height: 250px;">
+                            {{-- <a href="{{url('products/productDetail/'.$product->id)}}" class="stretched-link dark">{{$product->name}}</a> --}}
+                            <span>
+                                <h6 class="mt-2">{{ $product->name }}</h6>
+                            </span>
+                            <span>{{ $product->detail }}</span>
+                            <span>
+                                <h5>IDR {{ $product->price }}</h5>
+                            </span>
+                        </div>
+                    @endforeach
+                @else
+                    <h4>There's no item yet</h4>
+                @endif
             </div>
         </div>
     </div>

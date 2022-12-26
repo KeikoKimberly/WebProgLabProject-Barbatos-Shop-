@@ -36,7 +36,7 @@
                             </div>
                         @endforeach
                     @else
-                        <h4>Empty</h4>
+                        <h4>There's no item yet</h4>
                     @endif
                 </div>
             </div>

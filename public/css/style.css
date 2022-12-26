@@ -83,3 +83,9 @@ body{
     display: table-cell;
     padding-right: 1em;
   }
+
+  .item-home {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

@@ -1,6 +1,5 @@
 @extends('layout/main')
 @section('container')
-
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -34,6 +33,11 @@
                                 {{-- @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror --}}
+                            </div>
+                            <br>
+                            <div class="form-check mt-3">
+                                <input type="checkbox" class="form-check-input" name="remember_me">
+                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
                             </div>
                             <br>
                             <span>Don't have an account ? register <a href="{{ route('register') }}">here</a></span>

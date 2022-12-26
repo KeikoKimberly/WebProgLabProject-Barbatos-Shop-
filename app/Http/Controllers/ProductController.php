@@ -44,17 +44,10 @@ class ProductController extends Controller
 
     public function viewProductDetail($id)
     {
-        if (Auth::check() && auth()->user()->role == 1) {
-            $product = DB::table('products')->where('products.id', '=', $id)->first();
-            $categories = Category::all();
+        $product = DB::table('products')->where('products.id', '=', $id)->first();
+        $categories = Category::all();
 
-            return view('products.productDetail', ['product' => $product, 'categories' => $categories]);
-        } else {
-            $product = DB::table('products')->where('products.id', '=', $id)->first();
-            $categories = Category::all();
-
-            return view('products.productDetailAdmin', ['product' => $product, 'categories' => $categories]);
-        }
+        return view('products.productDetail', ['product' => $product, 'categories' => $categories]);
     }
 
     public function create()
