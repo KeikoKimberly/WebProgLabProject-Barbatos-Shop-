@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/homePage', [ProductController::class, 'viewProduct'])->name('homePage');
+Route::get('/', [ProductController::class, 'viewProduct'])->name('homePage');
 
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::get('/registerAdmin', [UserController::class, 'registerAdmin'])->name('registerAdmin');
@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(
 Route::prefix('/products')->name('products.')->group(function () {
     Route::get('/productCategory/{id?}', [ProductController::class, 'viewProduct'])->name('viewProduct');
     Route::get('/productDetail/{id?}', [ProductController::class, 'viewProductDetail'])->name('viewProductDetail');
-    Route::post('/purchase/{id}', [ProductController::class, 'purchase'])->name('purchase');
+    Route::get('/product/search', [ProductController::class, 'viewByName'])->name('viewByName');
 
     Route::middleware(['auth', 'admin'])->group(
         function () {

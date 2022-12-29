@@ -32,6 +32,8 @@ class TransactionController extends Controller
 
             $cartItem->delete();
         }
+
+        return redirect('homePage')->with('status', 'Item(s) Purchased!');
     }
 
     public function showHistory()

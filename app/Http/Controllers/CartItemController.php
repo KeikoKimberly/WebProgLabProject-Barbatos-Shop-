@@ -52,6 +52,6 @@ class CartItemController extends Controller
     public function destroy(CartItem $cartItem)
     {
         $cartItem->delete();
-        return redirect()->route('homePage');
+        return redirect()->route('cartItem.index')->with('status', 'Product Succefully Deleted From Your Cart');
     }
 }

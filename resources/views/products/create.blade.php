@@ -1,5 +1,5 @@
 @extends('layout/main')
-@section('title', "Barbatos Shop")
+@section('title', "Create Product")
 @section('container')
 
    <div class="container">

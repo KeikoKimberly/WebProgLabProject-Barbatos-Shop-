@@ -1,4 +1,5 @@
 @extends('layout/main')
+@section('title', "Barbatos Shop")
 @section('container')
     <br>
     @if (session('status'))
@@ -6,6 +7,15 @@
             {{ session('status') }}
         </div>
     @endif
+
+    <div class="container mb-3" style="max-width: 80em;">
+        <form class="d-flex" id="search-manage" action="{{route('products.viewByName')}}" method="GET">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name" required>
+            <button class="btn btn-primary" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </form>
+    </div>
 
     @foreach ($categories as $category)
         <div class="container" style="max-width: 80em; margin-bottom: 50px;">
@@ -25,7 +35,7 @@
                                     onclick="location.href='{{ url('products/productDetail/' . $product->id) }}';"
                                     style="cursor: pointer;"
                                     >
-                                        <img src="{{ asset('uploads/products/' . $product->photo) }}" alt="" style="width: 240px; height: 250px;">
+                                        <img src="{{ asset('storage/img/product_images/' . $product->photo) }}" alt="" style="width: 240px; height: 250px;">
                                         {{-- <a href="{{url('products/productDetail/'.$product->id)}}" class="stretched-link dark">{{$product->name}}</a> --}}
                                         <span><h6 class="mt-2">{{ $product->name }}</h6></span>
                                         <span>{{ $product->detail }}</span>

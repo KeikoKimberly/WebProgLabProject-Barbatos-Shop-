@@ -1,4 +1,5 @@
 @extends('layout/main')
+@section('title', "Login")
 @section('container')
     @if (session('status'))
         <div class="alert alert-success">

@@ -1,4 +1,5 @@
 @extends('layout/main')
+@section('title', "Admin Register")
 @section('container')
 
     <script type="text/javascript">

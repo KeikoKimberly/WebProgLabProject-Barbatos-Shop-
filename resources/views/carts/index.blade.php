@@ -4,8 +4,9 @@
 
 <div class="container">
     @if (count($cartItems) == 0)
-        <div class="text-center">
-            <h3>Your cart is empty</h3>
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 50vh;">
+            <h4>Your cart is empty!</h4>
+            <a class="btn btn-primary" href="{{Route('homePage')}}">Shop Now</a>
         </div>
         @else
             @foreach ($cartItems as $cartItem)
@@ -13,7 +14,7 @@
                     <div class="card col-8 p-3 mb-3">
                         <div class="row">
                             <div class="col-lg-3 col-12">
-                                <img src="{{ asset('uploads/products/'.$cartItem->product->photo) }}" class="img-fluid" alt="">
+                                <img src="{{ asset('storage/img/product_images/'.$cartItem->product->photo) }}" class="img-fluid" alt="">
                             </div>
                             <div class="col-lg-9 col-12">
                                 <div class="row align-items-start justify-content-start">
@@ -24,14 +25,14 @@
                                             <p>Total Price: IDR {{$cartItem->qty * $cartItem->product->price}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-2 text-end">
                                         <form action="{{route('cartItem.destroy', $cartItem->id)}}" method="POST">
                                             @csrf
                                             <input type="hidden" name='_method' value="DELETE">
                                             @method('DELETE')
 
-                                            <button type="submit" class="btn btn-danger">
-                                                Delete
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </form>
                                     </div>

@@ -42,6 +42,17 @@ class ProductController extends Controller
         return view('products.viewByCategory', ['product' => $products, 'title' => $title, 'categories' => $categories]);
     }
 
+    public function viewByName(Request $request)
+    {
+
+        $products = Product::where('name', 'LIKE', '%' . $request->name . '%')->paginate(10);
+        // return $products;
+        return view('products.viewByName', [
+            'categories' => Category::orderBy('name')->get(),
+            'products' => $products
+        ]);
+    }
+
     public function viewProductDetail($id)
     {
         $product = DB::table('products')->where('products.id', '=', $id)->first();
@@ -116,13 +127,13 @@ class ProductController extends Controller
             'photo' => $image,
         ]);
 
-        return redirect()->route('homePage');
+        return redirect()->route('products.manage')->with('status', 'Product successfully updated');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('homePage');
+        return redirect()->route('products.manage')->with('status', 'Product successfully deleted');
     }
 
     public function inputValidation($request, Bool $imageRequired)

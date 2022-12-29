@@ -1,11 +1,17 @@
 @extends('layout/main')
+@section('title', "$product->name")
 @section('container')
 
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="container" style="max-width: 80em; margin-top: 50px">
         <div class="card">
             <div class="row" style="margin: 20px">
                 <div class="col-lg-3 col-12">
-                    <img src="{{ asset('uploads/products/'.$product->photo) }}" class="img-fluid" alt="" style="width: 300px; height: 300px;">
+                    <img src="{{ asset('storage/img/product_images/'.$product->photo) }}" class="img-fluid" alt="" style="width: 300px; height: 300px;">
                 </div>
                 <div class="col-lg-9 col-12 px-md-5 px-2 py-md-0 py-2">
                     <form id="form-regist" enctype="multipart/form-data" action="{{route('cartItem.addToCart', $product->id)}}" method="POST">
@@ -34,11 +40,4 @@
 
 @endsection
 
-@section('script')
-<script>
-
-
-
-</script>
-@endsection
 
