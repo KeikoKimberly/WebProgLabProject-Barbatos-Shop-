@@ -1,5 +1,5 @@
 @extends('layout/main')
-@section('title', "$title->name" . " Category")
+@section('title', "$title->name" . ' Category')
 @section('container')
     <div class="container" style="margin-top: 50px">
         <div class="reg-title m-0" style="text-align: left; max-width: 100%">
@@ -12,17 +12,18 @@
                     @foreach ($data as $product)
                         <div class="col card card-block p-2"
                             onclick="location.href='{{ url('products/productDetail/' . $product->id) }}';"
-                            style="cursor: pointer;">
+                            style="cursor: pointer; margin: 15px; width: 220px;">
                             <img src="{{ asset('storage/img/product_images/' . $product->photo) }}" alt=""
-                                style="width: 235px; height: 250px;">
+                                style="width: 200px; height: 250px;">
                             {{-- <a href="{{url('products/productDetail/'.$product->id)}}" class="stretched-link dark">{{$product->name}}</a> --}}
-                            <span>
-                                <h6 class="mt-2">{{ $product->name }}</h6>
-                            </span>
-                            <span>{{ $product->detail }}</span>
-                            <span>
-                                <h5>IDR {{ $product->price }}</h5>
-                            </span>
+                            <div class="card-body">
+                                <h6 class="card-title">{{ $product->name }}</h6>
+
+                                <p class="card-text">{{ $product->detail }}</p>
+                                <span>
+                                    <h5>IDR {{ $product->price }}</h5>
+                                </span>
+                            </div>
                         </div>
                     @endforeach
                 @else

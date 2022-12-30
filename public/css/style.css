@@ -12,11 +12,11 @@
     background: #ccc;
 } */
 
-body{
+body {
     background: #ccc;
 }
 
-.page-content{
+.page-content {
     padding-top: 125px;
     padding-bottom: 75px;
 }
@@ -43,49 +43,75 @@ body{
     width: 100%;
 }
 
+.product-detail span {
+    /* word-break: break-all; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-block {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+}
+
 /* .card-block {
     height: 250px;
     width: 250px;
 } */
 
-  div.scrollmenu {
+div.scrollmenu {
     background-color: white;
     overflow: auto;
     white-space: nowrap;
     /* height: 400px; */
     min-width: 500px;
-  }
+}
 
-  div.scrollmenu a {
+div.scrollmenu a {
     display: inline-block;
     color: white;
     text-align: center;
     padding: 14px;
     text-decoration: none;
-  }
+}
 
-  div.scrollMenuCat {
+div.scrollMenuCat {
     background-color: white;
     overflow: auto;
     white-space: nowrap;
-  }
+}
 
-  ul {
+ul {
     list-style: none;
     display: table;
-  }
+}
 
-  li {
+li {
     display: table-row;
-  }
+}
 
-  b {
+b {
     display: table-cell;
     padding-right: 1em;
-  }
+}
 
-  .item-home {
+.item-home {
     display: block;
     margin-left: auto;
     margin-right: auto;
-  }
+}
