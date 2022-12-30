@@ -19,7 +19,7 @@
                         <h3>{{ $product->name }}</h3>
                         <li><b>Detail </b> {{ $product->detail }}</li>
                         <li><b>Price </b> {{ $product->price }}</li>
-                        @if (!Auth::check() || (Auth::check() && auth()->user()->role == 1))
+                        @if ((Auth::check() && auth()->user()->role == 1))
                         <li>
                             <b>Qty </b> <input type="number" min="1" name="qty" required>
                             @error('qty')

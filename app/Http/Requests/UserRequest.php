@@ -25,12 +25,19 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'confirmedPassword' => 'required|same:password',
             'country_id' => 'required',
             'dob' => 'required|before:today|after:01/01/1900',
             'gender' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.unique' => 'Email has been taken'
         ];
     }
 }

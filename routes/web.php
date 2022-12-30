@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [ProductController::class, 'viewProduct'])->name('homePage');
+Route::get('/homePage', [ProductController::class, 'viewProduct'])->name('homePage');
 
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::get('/registerAdmin', [UserController::class, 'registerAdmin'])->name('registerAdmin');

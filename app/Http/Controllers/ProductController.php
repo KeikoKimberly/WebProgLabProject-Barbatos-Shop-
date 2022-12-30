@@ -82,7 +82,13 @@ class ProductController extends Controller
             'created_at' =>  Carbon::now(),
         ]);
 
-        return view('products.viewByCategory');
+        $categories = Category::all();
+
+        $data = Product::where('products.category_id', '=', $request->category_id)->paginate(10);
+
+        $category_name = Category::where('id', '=', $request->category_id)->first();
+
+        return view('products.viewByCategory', ['data' => $data, 'categories' => $categories, 'title' => $category_name]);
     }
 
     public function manage()
